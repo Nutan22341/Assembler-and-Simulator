@@ -22,3 +22,40 @@ def countoccurrences(str, word):
             
     return count 
 
+
+def binary(num, bits=7):
+    binary_string = bin(num)[2:]
+    return str('{0:0>{1}}'.format(binary_string, bits))
+
+def typing_error_register(inputline):
+    global error
+    error=f"typing error in register in {inputline}"
+
+def typing_error_instruction(inputline):
+    global error
+    error=f"typing error in instruction in {inputline}"
+
+def general_syntax_error(inputline):
+    global error
+    error=f"general synatx error in {inputline}"
+
+def typeA(i, text, inputline):
+    if (i[1] not in registers.keys()):
+        typing_error_register(inputline)
+    if (i[2] not in registers.keys()):
+        typing_error_register(inputline)
+    if (i[3] not in registers.keys()):
+        typing_error_register(inputline)
+    text= text+ "00"+registers[i[1]]+registers[i[2]]+registers[i[3]]
+    return text
+
+def typeB(i, text, inputline):
+    global error
+    if (i[1] not in registers.keys()):
+        typing_error_register(inputline)
+    # print(i[2])
+    if(int(i[2][1:])<0 or int(i[2][1:])>127):
+        error=("Syntax Error : Immediate value out of range, line with error is : " + inputline)
+
+   
+
