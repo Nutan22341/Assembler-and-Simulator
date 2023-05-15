@@ -104,4 +104,57 @@ def typeC(i, text,inputline):
     text=text+'00000'+ registers[i[1]]+ registers[i[2]]
     return text
    
+counter=0
+for j in instruction:
+    i=j.split()
+
+    if i[0]!='var':
+        break
+    counter+=1
+# print(counter)
+
+hltcounter=0
+for i in instruction:
+    hltcounter+=countoccurrences(i,"hlt")
+if(hltcounter>1):
+    general_syntax_error()
+
+if (hltcounter==0):
+    error=("Syntax Error : Missing hlt instruction")
+    # exit() 
+elif (countoccurrences(instruction[-1],"hlt")==0):
+    error=("Syntax Error : hlt not being used as the last instruction")
+
+
+
+countoutputlines=0
+count_var=0
+
+for j in instruction:
+    i=j.split()
+    if i[0][-1]==':':
+        memory_dict[i[0][:-1]]=binary(countoutputlines)
+    if i[0]!='var':
+        countoutputlines+=1
+    else:
+        var_dict[i[1]]=binary(count_var)
+        count_var+=1
+
+inputline=0
+binarygeneratedcode=[]
+for j in instruction:
+    inputline+=1
+
+    i=j.split()
+    text=''
+    if i[0]!='var':
+
+        if (i[0][-1]==':'):
+            i.remove(i[0])
+
+
+
+        if 'FLAGS' in i and i[0]!='mov':    # flag register name is FLAGS
+                error=(f"Illegal use of flag register, line with error is : {inputline}")
+                break
 
