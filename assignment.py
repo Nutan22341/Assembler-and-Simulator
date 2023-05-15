@@ -56,6 +56,52 @@ def typeB(i, text, inputline):
     # print(i[2])
     if(int(i[2][1:])<0 or int(i[2][1:])>127):
         error=("Syntax Error : Immediate value out of range, line with error is : " + inputline)
+    # print(i[2])
+    num = int(i[2][1:])
+    # print(num)
+    text=text+ '0'+registers[i[1]]+binary(num)
+    return text
 
+
+def typeD(i, text, inputline):
+    global error
+    if i[1] not in registers:
+        typing_error_register(inputline)
+    text = text + '0' + registers[i[1]]
+
+    if i[2] in memory_dict:
+        text = text + memory_dict[i[2]]
+    else:
+        if i[2] in var_dict:
+            text = text + var_dict[i[2]]
+        else:
+            error = ("Syntax Error: Use of undefined variable, line with error is: "+inputline)
+            return 0
+
+    return text
+
+
+def typeE(i, text, inputline):
+    global error
+    if(i[1] in var_dict.keys()):
+        error=("Syntax Error: misuse of Variable as Label, line with error is : " + inputline)
+        return 0
+    elif(i[1] not in memory_dict.keys()):
+        error=("Syntax Error : Use of undefine label, line with error is : " + inputline)
+        return 0
+    text=text+'0000'+ memory_dict[i[1]]
+    return text
+
+def typeF(i, text, inputline):
+    text+='00000000000'
+    return text
+
+def typeC(i, text,inputline):
+    if (i[1] not in registers.keys()):
+        typing_error_register()
+    if (i[1] not in registers.keys()):
+        typing_error_register()
+    text=text+'00000'+ registers[i[1]]+ registers[i[2]]
+    return text
    
 
