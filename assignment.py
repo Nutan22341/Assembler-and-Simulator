@@ -142,6 +142,8 @@ for j in instruction:
 
 inputline=0
 binarygeneratedcode=[]
+with open("machinecode.txt", 'w') as f:
+    f.close()
 for j in instruction:
     inputline+=1
 
