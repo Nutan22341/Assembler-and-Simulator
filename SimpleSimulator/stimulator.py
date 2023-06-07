@@ -215,7 +215,7 @@ def jump_equal(bits):
 def printing(dict):
     for i in dict:
         if(i=="PC"):
-            print(format(dict["PC"], '07b')+" ",end='')
+            print(format(dict["PC"], '07b')+"        ",end='')
         else:
             print(dict[i]+" ",end='') 
     print('')
@@ -330,7 +330,7 @@ def decode_binary_instruction(binary_instruction):
         register_value["PC"] += 1
         
     elif opcode == "01111":
-        print(format(register_value["PC"], '07b')+" ",end='')
+        print(format(register_value["PC"], '07b')+"        ",end='')
         uncondition(binary_instruction)
         for i in register_value:
             if(i!="PC"):
@@ -340,18 +340,18 @@ def decode_binary_instruction(binary_instruction):
         
     elif opcode == "11100":
         # print(register_value["PC"])
-        print(format(register_value["PC"], '07b')+" ",end='')
+        print(format(register_value["PC"], '07b')+"        ",end='')
         jump_less(binary_instruction)
         for i in register_value:
             if(i!="PC"):
-                print(register_value[i]+" ",end='')
+                print(register_value[i]+"          ",end='')
         print("")
         
         # register_value["PC"] += 1
     elif opcode == "11101":
         # register_value["PC"] += 1
         # print(register_value["PC"])
-        print(format(register_value["PC"], '07b')+" ",end='')
+        print(format(register_value["PC"], '07b')+"        ",end='')
         jump_greater(binary_instruction)
         for i in register_value:
             if(i!="PC"):
@@ -360,7 +360,7 @@ def decode_binary_instruction(binary_instruction):
         
     elif opcode == "11111":
         # print(register_value["PC"])
-        print(format(register_value["PC"], '07b')+" ",end='') 
+        print(format(register_value["PC"], '07b')+"        ",end='') 
         jump_equal(binary_instruction)
         for i in register_value:
             if(i!="PC"):
@@ -372,11 +372,12 @@ def decode_binary_instruction(binary_instruction):
         exit()
     
 
-# with open("machinecode.txt", "r") as file:
-#     instructions = [line.strip() for line in file.readlines()]
+with open("machinecode.txt", "r") as file:
+    instructions = [line.strip() for line in file.readlines()]
     # print(instructions)
     while(instructions[register_value["PC"]][:5]!='11010' ):
         decode_binary_instruction(instructions[register_value["PC"]])
+    printing(register_value)
     print_memory_address(instructions)
     # for i in instructions:
         # opcode = i[:5]
