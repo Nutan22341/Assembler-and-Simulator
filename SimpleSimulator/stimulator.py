@@ -1,3 +1,4 @@
+import sys
 registers = {
     "111": "FLAGS",
     "110": "R1",
@@ -371,14 +372,18 @@ def decode_binary_instruction(binary_instruction):
     else :
         exit()
     
-
-with open("machinecode.txt", "r") as file:
-    instructions = [line.strip() for line in file.readlines()]
+instructions = []
+for input in sys.stdin:
+    input=input.strip()
+    if input!="":
+        instructions.append(input)
+# with open("machinecode.txt", "r") as file:
+#     instructions = [line.strip() for line in file.readlines()]
     # print(instructions)
-    while(instructions[register_value["PC"]][:5]!='11010' ):
-        decode_binary_instruction(instructions[register_value["PC"]])
-    printing(register_value)
-    print_memory_address(instructions)
+while(instructions[register_value["PC"]][:5]!='11010' ):
+    decode_binary_instruction(instructions[register_value["PC"]])
+printing(register_value)
+print_memory_address(instructions)
     # for i in instructions:
         # opcode = i[:5]
         # if opcode != '11010':
