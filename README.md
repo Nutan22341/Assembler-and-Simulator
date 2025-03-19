@@ -1,8 +1,12 @@
+# CO-Project-2023
 Group Members Details:-
 
 Nutan Kumari- 2022341
+
 Pandillapelly - 2022345
+
 Nikhil Rathore - 2022321
+
 Priyanshu Yadav - 2022383
 
 This is the repository for our group project for computer organization course .
